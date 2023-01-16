@@ -175,3 +175,63 @@ function callback(numbers) {
 // Вызов функции
 
 createCallback(callback);
+
+// 9.10. Каррирование
+console.log(' 9.10. Каррирование');
+function sum (a) {
+
+    return function (b)  {
+
+        return function (c)  {
+
+            return a + b + c;
+
+        }
+
+    }
+
+}
+
+console.log(sum(1)(2)(7));
+
+console.log('Расчёт объёма прямоугоьной призмы стрелочными функциями');
+
+let prism = function(length, width, height) {
+    return length * width * height;
+}
+
+
+
+console.log(prism(6,5,8));
+
+// Каррирование этой функции будет выглядеть так:
+
+function prism1(length) {
+    return function(width) {
+        return function(height) {
+            return length * width * height;
+        }
+    }
+}
+
+console.log(prism1(6)(5)(8));
+
+// Каррирование стрелочной функцией:
+
+let prism2 = length => width => height => length * width * height;
+
+console.log(prism2(6)(5)(8));
+
+// Задание 9.10.2
+
+function message(a) {
+    return (b) => {
+        return (c) => {
+            return b;
+        }
+    }
+}
+
+console.log(message(1)(2)(3));
+console.log(message(3)(2)(1));
+
